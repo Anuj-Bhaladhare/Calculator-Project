@@ -1,34 +1,44 @@
-const buttonAll = document.querySelectorAll(".btn");
-const inputShow = document.querySelector("[data-display]");
-
+const allButtons = document.querySelectorAll("button");
+const inputDesplay = document.querySelector(".display");
 let string = "";
-let arr = Array.from(buttonAll);
+let string2 = "";
 
-arr.forEach((buttonAll) => {
 
-  buttonAll.addEventListener("click", (e) => {
+allButtons.forEach(button => {
+  button.addEventListener("click", event => {
+      if(event.target.innerHTML == "="){
+        string = eval(string2);
+        inputDesplay.value = string;
+      }
+      else if(event.target.innerHTML == "AC"){
+        string = "";
+        string2 = "";
+        inputDesplay.value = string;
+      }
+      else if(event.target.innerHTML == "C"){
+        string = string.slice(0, -1);
+        string2 = string2.slice(0, -1);
+        inputDesplay.value = string;
+      }
+      else if(event.target.innerHTML == "X"){
+        string += "x";
+        string2 += "*";
+        inputDesplay.value = string;
+      }
+      else if(event.target.innerHTML == "÷"){
+        string2 += "/";
+        string += event.target.innerHTML;
+        inputDesplay.value = string;
+      }
+      else if(event.target.innerHTML == "%"){
+        string += "";
+        string2 += "";
+        inputDesplay.value = string;
+      }
+      else{
+        inputDesplay.value = string += event.target.innerHTML;
+        inputDesplay.value = string2 += event.target.innerHTML;
+      }
+  })
+})
 
-    if (e.target.innerHTML == "=") 
-    {
-      string = eval(string);
-      inputShow.value = string;
-    } 
-    else if (e.target.innerHTML == "AC") 
-    {
-      string = "";
-      inputShow.value = string;
-    } 
-    else if (e.target.innerHTML == "C") 
-    {
-      string = string.substring(0, string.length - 1);
-      inputShow.value = string;
-    } 
-    else 
-    {
-      string += e.target.innerHTML;
-      inputShow.value = string;
-    }
-
-  });
-
-});
